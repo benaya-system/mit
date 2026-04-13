@@ -198,40 +198,36 @@
   </div>
 
   <script>
-    const CODIGO_VALIDO = "1716.1716.a581b11c34bb";
-    const ARQUIVO_PDF = "diploma.pdf";
+    
+  const CODIGO_VALIDO = "1716.1716.a581b11c34bb";
+  const ARQUIVO_PDF = "diploma.pdf";
 
-    const inputCodigo = document.getElementById("codigo");
-    const btnConsultar = document.getElementById("btnConsultar");
-    const mensagemErro = document.getElementById("mensagemErro");
+  const inputCodigo = document.getElementById("codigo");
+  const btnConsultar = document.getElementById("btnConsultar");
+  const mensagemErro = document.getElementById("mensagemErro");
 
-    function baixarPdf() {
-      const link = document.createElement("a");
-      link.href = ARQUIVO_PDF;
-      link.download = "diploma.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+  function abrirPdf() {
+    window.open(ARQUIVO_PDF, "_blank");
+  }
+
+  function consultarCodigo() {
+    const valorDigitado = inputCodigo.value.trim();
+
+    if (valorDigitado === CODIGO_VALIDO) {
+      mensagemErro.style.display = "none";
+      abrirPdf();
+    } else {
+      mensagemErro.style.display = "block";
     }
+  }
 
-    function consultarCodigo() {
-      const valorDigitado = inputCodigo.value.trim();
+  btnConsultar.addEventListener("click", consultarCodigo);
 
-      if (valorDigitado === CODIGO_VALIDO) {
-        mensagemErro.style.display = "none";
-        baixarPdf();
-      } else {
-        mensagemErro.style.display = "block";
-      }
+  inputCodigo.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      consultarCodigo();
     }
-
-    btnConsultar.addEventListener("click", consultarCodigo);
-
-    inputCodigo.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        consultarCodigo();
-      }
-    });
+  });
   </script>
 </body>
 </html>
